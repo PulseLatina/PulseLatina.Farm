@@ -1480,6 +1480,8 @@ contract MasterChef is Ownable, ReentrancyGuard {
         latinaPerBlock = _latinaPerBlock;
         maxLatinaMintedPerHalving = _maxLatinaMintedPerHalving;
         startBlock = _startBlock;
+
+        latinaLeftToBeMintedThisHalving = maxLatinaMintedPerHalving;
     }
 
     function poolLength() external view returns (uint256) {
