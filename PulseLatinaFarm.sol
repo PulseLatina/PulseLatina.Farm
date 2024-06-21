@@ -1444,7 +1444,6 @@ contract MasterChef is Ownable, ReentrancyGuard {
     uint256 public startBlock;
 
     // halving system
-    uint public firstHalvingDays = 3;
     uint256 public maxLatinaMintedPerHalving;
     uint256 public latinaMintedThisHalving;
     uint256 public latinaLeftToBeMintedThisHalving;
