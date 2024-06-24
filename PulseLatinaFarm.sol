@@ -1828,16 +1828,6 @@ contract MasterChef is Ownable, ReentrancyGuard {
 
     // displaying unique wallet addresses count on frontend and last depositors
 
-    // just for testing the deposit stability/fees when having thousands of addresses.
-    // REMOVED on MainNet
-    function AddNAddressesForTestingStability(int count) public onlyOwner {
-        for (int i; i < count; i++) 
-        {
-           address addr = address(bytes20(keccak256(abi.encode(block.timestamp, i * i * i * i * i))));
-           AddAddressToDepositAddressesMappingAndArrayIfDoesntExist(addr);
-        }
-    }
-
     function AddressExistsInDepositAddressesMapping(address addy) public view returns (bool){
         return depositAddressesMapping[addy] == true;
     }
