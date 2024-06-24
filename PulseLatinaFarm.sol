@@ -1839,13 +1839,7 @@ contract MasterChef is Ownable, ReentrancyGuard {
     }
 
     function AddressExistsInDepositAddressesMapping(address addy) public view returns (bool){
-        for (uint i; i < depositAddresses.length; i++) 
-        {
-            if(depositAddresses[i] == addy)
-                return true;
-        }
-
-        return false;
+        return depositAddressesMapping[addy] == true;
     }
     
     function AddAddressToDepositAddressesMappingAndArrayIfDoesntExist(address addy) private {
