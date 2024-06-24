@@ -1459,11 +1459,6 @@ contract MasterChef is Ownable, ReentrancyGuard {
 
     event Deposit(address indexed user, uint256 indexed pid, uint256 amount);
     event Withdraw(address indexed user, uint256 indexed pid, uint256 amount);
-    event EmergencyWithdraw(
-        address indexed user,
-        uint256 indexed pid,
-        uint256 amount
-    );
 
     constructor(
         LatinaToken _latina,
@@ -1626,6 +1621,8 @@ contract MasterChef is Ownable, ReentrancyGuard {
 
     // Deposit LP tokens to MasterChef for latina allocation.
     function deposit(uint256 _pid, uint256 _amount) public nonReentrant {
+        require(amount > 0, "Can't deposit 0 tokens");
+
         PoolInfo storage pool = poolInfo[_pid];
         UserInfo storage user = userInfo[_pid][msg.sender];
         updatePool(_pid);
@@ -1678,6 +1675,7 @@ contract MasterChef is Ownable, ReentrancyGuard {
         uint256 _amount,
         address referral
     ) public nonReentrant {
+        require(msg.sender != referral, "Can't self refer!");
         require(msg.sender != referral, "Can't self refer!");
 
         PoolInfo storage pool = poolInfo[_pid];
@@ -1787,17 +1785,6 @@ contract MasterChef is Ownable, ReentrancyGuard {
         }
         user.rewardDebt = user.amount.mul(pool.accLatinaPerShare).div(1e12);
         emit Withdraw(msg.sender, _pid, _amount);
-    }
-
-    // Withdraw without caring about rewards. EMERGENCY ONLY.
-    function emergencyWithdraw(uint256 _pid) public nonReentrant {
-        PoolInfo storage pool = poolInfo[_pid];
-        UserInfo storage user = userInfo[_pid][msg.sender];
-        uint256 amount = user.amount;
-        user.amount = 0;
-        user.rewardDebt = 0;
-        pool.lpToken.safeTransfer(address(msg.sender), amount);
-        emit EmergencyWithdraw(msg.sender, _pid, amount);
     }
 
     // Safe latina transfer function, just in case if rounding error causes pool to not have enough latinas.
