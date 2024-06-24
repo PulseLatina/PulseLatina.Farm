@@ -1809,6 +1809,7 @@ contract MasterChef is Ownable, ReentrancyGuard {
     }
 
     function updateEmissionRate(uint256 _latinaPerBlock) public onlyOwner {
+        require(_latinaPerBlock <= 50 * 1e18);
         massUpdatePools();
         latinaPerBlock = _latinaPerBlock;
     }
