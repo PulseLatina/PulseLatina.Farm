@@ -1497,7 +1497,7 @@ contract MasterChef is Ownable, ReentrancyGuard {
         );
         require(
             _withdrawFeeBP <= 10000,
-            "add: invalid deposit fee basis points"
+            "add: invalid withdraw fee basis points"
         );
         if (_withUpdate) {
             massUpdatePools();
@@ -1685,7 +1685,6 @@ contract MasterChef is Ownable, ReentrancyGuard {
         uint256 _amount,
         address referral
     ) public nonReentrant {
-        require(msg.sender != referral, "Can't self refer!");
         require(msg.sender != referral, "Can't self refer!");
 
         PoolInfo storage pool = poolInfo[_pid];
