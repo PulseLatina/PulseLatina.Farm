@@ -1631,7 +1631,7 @@ contract MasterChef is Ownable, ReentrancyGuard {
 
     // Deposit LP tokens to MasterChef for latina allocation.
     function deposit(uint256 _pid, uint256 _amount) public nonReentrant {
-        require(amount > 0, "Can't deposit 0 tokens");
+        require(_amount > 0, "Can't deposit 0 tokens");
 
         PoolInfo storage pool = poolInfo[_pid];
         UserInfo storage user = userInfo[_pid][msg.sender];
