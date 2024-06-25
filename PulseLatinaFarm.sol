@@ -1495,6 +1495,10 @@ contract MasterChef is Ownable, ReentrancyGuard {
             _depositFeeBP <= 10000,
             "add: invalid deposit fee basis points"
         );
+        require(
+            _withdrawFeeBP <= 10000,
+            "add: invalid deposit fee basis points"
+        );
         if (_withUpdate) {
             massUpdatePools();
         }
@@ -1519,10 +1523,15 @@ contract MasterChef is Ownable, ReentrancyGuard {
         uint256 _pid,
         uint256 _allocPoint,
         uint16 _depositFeeBP,
+        uint16 _withdrawFeeBP,
         bool _withUpdate
     ) public onlyOwner {
         require(
             _depositFeeBP <= 10000,
+            "set: invalid deposit fee basis points"
+        );
+        require(
+            _withdrawFeeBP <= 10000,
             "set: invalid deposit fee basis points"
         );
         if (_withUpdate) {
@@ -1533,6 +1542,7 @@ contract MasterChef is Ownable, ReentrancyGuard {
         );
         poolInfo[_pid].allocPoint = _allocPoint;
         poolInfo[_pid].depositFeeBP = _depositFeeBP;
+        poolInfo[_pid].withdrawFeeBP = _withdrawFeeBP;
     }
 
     // Return reward multiplier over the given _from to _to block.
