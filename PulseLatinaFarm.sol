@@ -1492,11 +1492,11 @@ contract MasterChef is Ownable, ReentrancyGuard {
         bool _withUpdate
     ) public onlyOwner {
         require(
-            _depositFeeBP <= 50,
+           _depositFeeBP <= 500,
             "add: invalid deposit fee basis points"
         );
         require(
-            _withdrawFeeBP <= 50,
+            _withdrawFeeBP <= 500,
             "add: invalid withdraw fee basis points"
         );
         if (_withUpdate) {
@@ -1527,11 +1527,11 @@ contract MasterChef is Ownable, ReentrancyGuard {
         bool _withUpdate
     ) public onlyOwner {
         require(
-            _depositFeeBP <= 50,
+            _depositFeeBP <= 500,
             "set: invalid deposit fee basis points"
         );
         require(
-            _withdrawFeeBP <= 50,
+            _withdrawFeeBP <= 500,
             "set: invalid withdraw fee basis points"
         );
         if (_withUpdate) {
